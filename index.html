@@ -1,101 +1,220 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vishal Chindarkar | Portfolio</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #333;
+    /* --- Global Styles --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Poppins", sans-serif; background: #0f172a; color: white; scroll-behavior: smooth; overflow-x: hidden; }
+    a { text-decoration: none; }
+
+    /* --- Navbar --- */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 50px; background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
     }
-    header {
-      background: #222;
-      color: #fff;
-      padding: 2rem;
-      text-align: center;
+    nav h1 { font-size: 24px; color: #38bdf8; font-weight: bold; }
+    nav ul { display: flex; gap: 25px; list-style: none; }
+    nav ul li a { color: white; font-weight: 500; transition: 0.3s; }
+    nav ul li a:hover { color: #38bdf8; }
+
+    /* --- Hero Section --- */
+    .hero {
+      height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      background: radial-gradient(circle at top left, #2563eb, #9333ea);
+      position: relative; overflow: hidden; padding: 0 20px;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+    .hero h2 {
+      font-size: 56px; font-weight: 700; margin-bottom: 15px;
+      animation: fadeInDown 1.5s ease;
     }
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 1.2rem;
+    .hero p {
+      font-size: 20px; color: #e0e0e0;
+      margin-bottom: 25px;
     }
-    section {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem;
+    .btn {
+      display: inline-block; background: #38bdf8; color: #0f172a;
+      padding: 14px 32px; border-radius: 30px; font-weight: bold;
+      transition: 0.3s; box-shadow: 0 0 15px rgba(56,189,248,0.5);
     }
-    h2 {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
+    .btn:hover { background: #0ea5e9; transform: scale(1.05); }
+
+    /* Typing animation */
+    .typing {
+      display: inline-block; border-right: 3px solid white;
+      white-space: nowrap; overflow: hidden;
+      animation: typing 5s steps(40, end) infinite alternate, blink 0.75s step-end infinite;
     }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* Floating Shapes */
+    .circle {
+      position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1);
+      animation: float 6s ease-in-out infinite;
+    }
+    .circle.small { width: 40px; height: 40px; bottom: 20%; left: 10%; }
+    .circle.medium { width: 80px; height: 80px; top: 15%; right: 20%; animation-duration: 8s; }
+    .circle.large { width: 120px; height: 120px; bottom: 10%; right: 10%; animation-duration: 10s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* --- Sections General --- */
+    section { padding: 80px 20px; max-width: 1100px; margin: auto; }
+    h2 { text-align: center; font-size: 32px; margin-bottom: 40px; color: #38bdf8; }
+
+    /* --- Skills --- */
+    .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
     .card {
-      background: #fff;
-      padding: 1rem 1.5rem;
-      margin: 1rem 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: #1e293b; padding: 20px; border-radius: 12px; text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: 0.3s;
     }
-    ul {
-      list-style: none;
-      padding: 0;
+    .card:hover { transform: translateY(-8px); background: #334155; }
+
+    /* --- Projects --- */
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .project {
+      background: #1e293b; padding: 20px; border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: 0.3s;
     }
-    ul li::before {
-      content: "✔ ";
-      color: green;
+    .project:hover { transform: translateY(-8px); background: #334155; }
+
+    /* --- Education --- */
+    .education {
+      background: #1e293b; padding: 30px; border-radius: 12px;
+      text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
-    footer {
-      background: #222;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
+
+    /* --- Contact --- */
+    .contact { text-align: center; }
+    .contact a {
+      display: inline-block; margin: 10px; padding: 12px 20px; border-radius: 30px;
+      background: #38bdf8; color: #0f172a; font-weight: bold; transition: 0.3s;
     }
-    a {
-      color: #0077cc;
-      text-decoration: none;
-    }
+    .contact a:hover { background: #0ea5e9; }
+
+    /* --- Footer --- */
+    footer { background: #111; color: #bbb; text-align: center; padding: 20px; margin-top: 40px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Vishal Sadanand Chindarkar</h1>
-    <p>📞 9699260235 | ✉ <a href="mailto:vishalchindarkar2005@gmail.com" style="color:#fff;">vishalchindarkar2005@gmail.com</a></p>
-  </header>  <section>
-    <h2>Professional Summary</h2>
-    <div class="card">
-      <p>I am an engineering student in Artificial Intelligence and Machine Learning at Mumbai University with skills in Python, NumPy, Pandas, and Matplotlib. Currently, I am building projects to deepen my understanding of machine learning and data analysis.</p>
+
+  <!-- Navbar -->
+  <nav>
+    <h1>Vishal</h1>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <h2>Vishal Chindarkar</h2>
+    <p class="typing">Engineering Student | ML Learner | Data Scientist</p>
+    <a href="#contact" class="btn">Let’s Connect</a>
+
+    <!-- Floating shapes -->
+    <div class="circle small"></div>
+    <div class="circle medium"></div>
+    <div class="circle large"></div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills & Expertise</h2>
+    <div class="skills">
+      <div class="card">
+        <h3>Python & Data Science</h3>
+        <p>Proficient in Python, NumPy, Pandas, and data cleaning. Exploring ML and data analysis.</p>
+      </div>
+      <div class="card">
+        <h3>Machine Learning</h3>
+        <p>Learning supervised & unsupervised models. Building real-world ML projects.</p>
+      </div>
+      <div class="card">
+        <h3>Web Development</h3>
+        <p>Responsive websites using HTML, CSS, JS. Academic tracking apps.</p>
+      </div>
     </div>
-  </section>  <section>
-    <h2>Skills</h2>
-    <div class="card">
-      <ul>
-        <li>Python Programming</li>
-        <li>NumPy, Pandas, Matplotlib</li>
-        <li>Jupyter Notebook, Google Colab</li>
-      </ul>
-    </div>
-  </section>  <section>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
     <h2>Projects</h2>
-    <div class="card">
-      <h3>Smart Library Management System</h3>
-      <p>A program to keep track of books, members, and borrowing records using Python.</p>
+    <div class="projects">
+      <div class="project">
+        <h3>Academic Tracker</h3>
+        <p>A web-based tool for students to track exam results and academic progress.</p>
+      </div>
+      <div class="project">
+        <h3>ML Mini Projects</h3>
+        <p>Experiments like prediction models and data analysis using scikit-learn.</p>
+      </div>
     </div>
-  </section>  <section>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
     <h2>Education</h2>
-    <div class="card">
-      <p><strong>B.E. in Artificial Intelligence & Machine Learning</strong></p>
-      <p>Gharda Institute of Technology, Mumbai University</p>
-      <p>Expected Graduation: 2027</p>
-      <p>CGPA: 8.72 (Recent)</p>
+    <div class="education">
+      <h3>B.E in Artificial Intelligence and Machine Learning</h3>
+      <p>Gharada Institute of Technology, Mumbai University</p>
     </div>
-  </section>  <footer>
-    <p>© 2025 Vishal Chindarkar | Portfolio</p>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Get in Touch</h2>
+    <div class="contact">
+      <a href="mailto:vishalchindarkar2005@gmail.com">📧 Email</a>
+      <a href="tel:+919699260235">📞 Call</a>
+      <a href="https://linkedin.com/in/vishalchindarkar" target="_blank">🔗 LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Vishal Chindarkar | Built with HTML, CSS & JavaScript 🚀</p>
   </footer>
+
+  <!-- JavaScript for animations -->
+  <script>
+    // Simple fade-in animation on scroll
+    const faders = document.querySelectorAll('.card, .project, .education');
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+      fader.style.opacity = "0";
+      fader.style.transform = "translateY(40px)";
+      fader.style.transition = "all 0.8s ease-out";
+      appearOnScroll.observe(fader);
+    });
+  </script>
+
 </body>
 </html>
